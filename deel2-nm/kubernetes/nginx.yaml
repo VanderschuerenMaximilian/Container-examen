@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-maximilian-vanderschueren
+  labels:
+    exam: containers-orchestration
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-maximilian-vanderschueren
+  template:
+    metadata:
+      labels:
+        app: nginx-maximilian-vanderschueren
+    spec:
+      containers:
+      - name: nginx
+        image: nathansegers/vue-docker:v2.0.0
+        ports:
+        - containerPort: 80

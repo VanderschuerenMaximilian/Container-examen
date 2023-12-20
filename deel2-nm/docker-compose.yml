@@ -3,7 +3,7 @@ services:
     image: nathansegers/containers_23-24_december_api:versie2
     build:
       context: ./api
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     ports:
       - 8001:80
   frontend:

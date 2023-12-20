@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api
-  namespace: howest-api
+  name: backend-deployment
+  namespace: exam-maximilianvanderschueren
   labels:
-    createdBy: "Nathan-Segers"
-  
+    createdBy: "Maximilian-Vanderschueren"
+
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: app
+      app: api
   template:
     metadata:
       labels:
         app: api
     spec:
       containers:
-        - image: nathansegers/containers_23-24_december_api
+        - image: lianvanderschueren/api-mv
           imagePullPolicy: Always
           name: api-demo
           ports:
@@ -29,7 +29,21 @@ spec:
               port: 80
             initialDelaySeconds: 15
             periodSeconds: 10
-         
+          env:
+            - name: NAME
+              value: "Maximilian Vanderschueren"
+            - name: DATE
+              value: "today"
+          volumeMounts:
+            - name: config-volume
+              mountPath: /mnt/config
+              readOnly: true
+              
+      volumes:
+        - name: config-volume
+          configMap:
+            name: backend-configmap
+
 ---
 apiVersion: v1
 kind: Service
@@ -38,8 +52,8 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app: app
+    app: api
   ports:
     - port: 80
-      targetPort: 8000
+      targetPort: 8080
       nodePort: 30002

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-configmap
+  namespace: exam-maximilianvanderschueren
+data:
+  API_PORT: "30001"
+  API_HOST: "localhost"
